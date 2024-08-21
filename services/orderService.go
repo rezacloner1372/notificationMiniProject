@@ -8,26 +8,23 @@ import (
 
 // register the order
 type OrderService struct {
-	EmaileService *externalServices.EmailService
-	SmsService    * externalServices.SmsService
+	Notifier externalServices.Notifier
 }
 
 // Method to create a new order
-func (o *OrderService) CreateOrder(order *entities.Order) (*entities.Order) {
+func (orderService *OrderService) CreateOrder(order *entities.Order) *entities.Order {
 	// TODO: Implement the logic to register the order
 	fmt.Printf("Order Created : %v\n", order)
 	// send sms or email notifiaction
-	o.EmaileService.SendEmail(order)
-	o.SmsService.SendSms(order)
+	orderService.Notifier.SendNotify(order.UserName, "Order Created")
 
 	return order
 }
 
 // create method New for OrderService
-func NewOrderService() *OrderService {
+func NewOrderService(notifier externalServices.Notifier) *OrderService {
 	return &OrderService{
-		EmaileService: externalServices.NewEmailService(),
-		SmsService: externalServices.NewSmsService(),
+		Notifier: notifier,
 	}
-	
+
 }

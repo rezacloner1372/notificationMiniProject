@@ -16,6 +16,10 @@ func (e *EmailService) SendEmail(order *entities.Order) {
 
 }
 
+func (e *EmailService) SendNotify(receiver string, message string) {
+	fmt.Printf("email Sent : receiver %s\n, message %s\n", receiver, message)
+}
+
 func NewEmailService() *EmailService {
 	return &EmailService{}
 }

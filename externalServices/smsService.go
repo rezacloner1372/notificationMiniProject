@@ -10,9 +10,12 @@ type SmsService struct {
 }
 
 func (e *SmsService) SendSms(order *entities.Order) {
-	// TODO: Implement the logic to send email
 	fmt.Printf("Sms Sent : %v\n", order)
 
+}
+
+func (e *SmsService) SendNotify(receiver string, message string) {
+	fmt.Printf("Sms Sent : receiver %s\n, message %s\n", receiver, message)
 }
 
 func NewSmsService() *SmsService {
